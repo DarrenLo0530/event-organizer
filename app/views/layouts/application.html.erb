@@ -9,7 +9,20 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+    
+
+  <body class="main-background">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+        <%= link_to "EventOrg", root_path, class: "navbar-brand"%>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="toggle navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            </ul>
+        </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

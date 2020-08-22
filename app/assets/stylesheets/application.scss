@@ -15,3 +15,14 @@
  */
 
 @import "bootstrap";
+
+.main-background {
+    background: #121212;
+}
+
+.card-columns {
+
+    @include media-breakpoint-only(xl) {
+      column-count: 3;
+    }
+}
