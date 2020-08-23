@@ -1,5 +1,17 @@
 <div class="container">
-    <div class="card-columns">
-        <%= render partial: "event", collection: @events %>
-    </div>
+    <% if @events.exists? %>
+        <div class="row justify-content-center mb-3">
+            <h1 class="font-weight-bold">All Events</h1>
+        </div>
+        <div class="card-columns">
+            <%= render partial: "event", collection: @events, locals: {is_show: true}%>
+        </div>
+    <% else%>
+        <div class="jumbotron bg-dark">
+            <h1 class="display-4">Organize An Event!</h1>
+            <p class="lead">There are currently no events on this website. Be the first one to organize an event!</p>
+            <hr class="my-4 border border-secondary">
+            <p>Invite your friends to this website to stay up to date with the latest events!</p>
+        </div>
+    <% end %>
 </div>

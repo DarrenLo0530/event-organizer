@@ -20,6 +20,14 @@
     background: #121212;
 }
 
+.navbar-nav a{
+    margin-left: 1rem;
+}
+
+.alert {
+    margin-bottom: 0;
+}
+
 .card-columns {
 
     @include media-breakpoint-only(xl) {

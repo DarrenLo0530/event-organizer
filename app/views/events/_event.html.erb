@@ -1,9 +1,20 @@
-<div class="card bg-dark text-light border border-white">
+<div class="card bg-dark border border-white">
     <div class="card-body">
         <h5 class="card-title font-weight-bold"><%= event.name %></h5>
         <p class="card-subtitle"<%= event.creator %>></p>
         <p class="card-text"><%= event.description %></p>
+        <p>Event Time: <%= event.time.to_formatted_s(:long_ordinal) %></p>
+        
     </div>
-    <div class="card-footer text-muted"><%= event.time.to_formatted_s(:long_ordinal) %></div>
+    <div class="card-footer text-muted">
+        <% unless current_user.attended_events.include?(event) %>
+            <%= link_to "Attend", event_registrations_path(event), method: :post, class: "btn btn-primary"%>
+        <% else %>
+            <%= link_to "Attending", root_path, class: "btn btn-primary disabled", "aria-disabled": true, tabindex: '-1' %>
+        <% end %>
+        <% if is_show %>
+            <%= link_to "View Attendees", event_path(event), class: "btn btn-primary"%>
+        <% end %>
+    </div>
 </div>
     

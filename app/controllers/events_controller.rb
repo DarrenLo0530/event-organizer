@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :new, :create, :update, :destroy]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -9,14 +10,15 @@ class EventsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @event = current_user.created_events.build
   end
   
   def create
-    @post = Post.new(event_params)
-    if @post.save
+    @event = current_user.created_events.build(event_params)
+    if @event.save
       redirect_to events_path
     else
+      flash.now[:danger] = @event.errors.full_messages
       render :new
     end
   end
@@ -25,7 +27,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    if post.update(event_params)
+    if event.update(event_params)
       redirect_to event_path(params[:id])
     else
       render :edit
@@ -33,13 +35,12 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
+    @event.destroy
   end
-
 
   private
   def set_event
-    @event = event.find(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def event_params

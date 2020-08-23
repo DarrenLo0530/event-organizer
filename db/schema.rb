@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_22_040426) do
+ActiveRecord::Schema.define(version: 2020_08_23_083850) do
+
+  create_table "attendings", force: :cascade do |t|
+    t.integer "attendee_id"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendee_id"], name: "index_attendings_on_attendee_id"
+    t.index ["event_id"], name: "index_attendings_on_event_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -30,6 +39,8 @@ ActiveRecord::Schema.define(version: 2020_08_22_040426) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

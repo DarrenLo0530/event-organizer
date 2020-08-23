@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <%= render partial: "event", locals: {event: @event, is_show: false} %>
+        </div>
+        <div class="col-7">
+            <div class="card bg-dark text-light">
+                <div class="card-header border-bottom border-primary">
+                    <h2 class="mb-0 font-weight-bold">
+                        <% if @event.attendees.exists? %>
+                            Attendees
+                        <% else %>
+                            No Attendees Currently
+                        <% end %>
+                    </h2>
+                </div>
+                <ul class="list-group">
+                    <%= render partial: "user", collection: @event.attendees, as: :attendee %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
