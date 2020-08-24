@@ -1,5 +1,59 @@
 <div class="container">
     <div class="row justify-content-center mb-3">
-        <h1 class="font-weight-bold"></h1>
+        <h1 class="font-weight-bold"><%="#{@user.name}'s Profile"%> <small class="text-light"><%="@#{@user.username}"%></small></h1>
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-10">
+        
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <h4 class="font-weight-bold card-text">Organized Events</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <% if @user.created_events.exists? %>
+                        <%= render partial: "event", collection: @user.created_events, as: :event%>
+                    <% else %>
+                        <li class="list-group-item bg-dark">No Events Organized</li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-10">
+        
+            <div class="card">
+                <div class="card-header bg-success">
+                    <h4 class="font-weight-bold card-text">Future Events</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <% if @user.attended_events.where("time > ?", DateTime.now).exists? %>
+                        <%= render partial: "event", collection: @user.attended_events.where("time > ?", DateTime.now), as: :event%>
+                    <% else %>
+                        <li class="list-group-item bg-dark text-warning">No Events Attending</li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>  
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-10">
+        
+            <div class="card">
+                <div class="card-header bg-danger">
+                    <h4 class="font-weight-bold card-text">Past Events</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <% if @user.attended_events.where("time <= ?", DateTime.now).exists? %>
+                        <%= render partial: "event", collection: @user.attended_events.where("time <= ?", DateTime.now), as: :event%>
+                    <% else %>
+                        <li class="list-group-item bg-dark text-warning">No Events Attended</li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

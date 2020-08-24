@@ -1,11 +1,20 @@
 <div class="container">
     <% if @events.exists? %>
+
         <div class="row justify-content-center mb-3">
-            <h1 class="font-weight-bold">All Events</h1>
+            <h1 class="font-weight-bold mb-5 bg-success p-3 rounded">Upcoming Events</h1>
+            <div class="card-columns">
+                <%= render partial: "event", collection: @events.past, locals: {is_show: true}%>
+            </div>
         </div>
-        <div class="card-columns">
-            <%= render partial: "event", collection: @events, locals: {is_show: true}%>
+
+        <div class="row justify-content-center mb-3">
+            <h1 class="font-weight-bold mb-5 bg-danger p-3 rounded">Past Events</h1>
+            <div class="card-columns">
+                <%= render partial: "event", collection: @events.upcoming, locals: {is_show: true}%>
+            </div>
         </div>
+        
     <% else%>
         <div class="jumbotron bg-dark">
             <h1 class="display-4">Organize An Event!</h1>

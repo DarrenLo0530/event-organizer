@@ -5,4 +5,7 @@ class Event < ApplicationRecord
   has_many :attendees, through: :attendings
 
   validates :name, :description, :time, :creator_id, presence: true
+
+  scope :past, -> {where("time <= ?", Time.now)}
+  scope :upcoming, -> {where("time > ?", Time.now)}
 end

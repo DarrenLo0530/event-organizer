@@ -1,3 +1,0 @@
-UserRegistrationsController < ApplicationController
-  private 
-end
