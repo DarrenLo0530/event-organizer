@@ -1,1 +1,4 @@
-<li class="list-group-item bg-dark"><%= attendee.email %></li>
+<li class="list-group-item bg-dark d-flex justify-content-between">
+    <span class="d-flex align-items-center"><%= attendee.email %></span>
+    <%= link_to "View Profile", user_path(attendee), class: "btn btn-info"%>
+</li>

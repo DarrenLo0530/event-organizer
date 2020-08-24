@@ -7,10 +7,12 @@
         
     </div>
     <div class="card-footer text-muted">
-        <% unless current_user.attended_events.include?(event) %>
-            <%= link_to "Attend", event_registrations_path(event), method: :post, class: "btn btn-primary"%>
-        <% else %>
+        <% if event.time < Time.now %>
+            <%= link_to "Event Over", root_path, class: "btn btn-primary disabled", "aria-disabled": true, tabindex: '-1' %>
+        <% elsif user_signed_in? && current_user.attended_events.include?(event) %>
             <%= link_to "Attending", root_path, class: "btn btn-primary disabled", "aria-disabled": true, tabindex: '-1' %>
+        <% else %>
+            <%= link_to "Attend", event_registrations_path(event), method: :post, class: "btn btn-primary"%>
         <% end %>
         <% if is_show %>
             <%= link_to "View Attendees", event_path(event), class: "btn btn-primary"%>

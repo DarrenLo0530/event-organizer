@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.created_events.build(event_params)
     if @event.save
+      current_user.attended_events << @event
       redirect_to events_path
     else
       flash.now[:danger] = @event.errors.full_messages
