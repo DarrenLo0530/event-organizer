@@ -1,0 +1,9 @@
+<li class="list-group-item d-flex bg-dark text-light align-items-center justify-content-between">
+    <span class="font-weight-bold"><%= invite.event.name %></span>
+    <span><%= "From: #{invite.inviter.name}" %></span>
+    <nav>
+        <%= link_to "View", event_path(invite.event), class: "btn btn-primary"%>
+        <%= link_to "Accept", invite_path(invite, accept: "1"), method: :delete, class: "btn btn-success"%>
+        <%= link_to "Decline", invite_path(invite, accept: "0"), method: :delete, data: {confirm: "Are you sure you want to decline?"}, class: "btn btn-danger"%>
+    </nav>
+</li>

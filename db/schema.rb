@@ -34,8 +34,10 @@ ActiveRecord::Schema.define(version: 2020_08_24_025924) do
   create_table "invites", force: :cascade do |t|
     t.integer "inviter_id"
     t.integer "invitee_id"
+    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_invites_on_event_id"
     t.index ["invitee_id"], name: "index_invites_on_invitee_id"
     t.index ["inviter_id"], name: "index_invites_on_inviter_id"
   end

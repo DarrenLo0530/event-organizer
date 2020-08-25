@@ -1,4 +1,7 @@
 <li class="list-group-item bg-dark d-flex justify-content-between">
-    <span class="d-flex align-items-center"><%= attendee.email %></span>
+    <span class="d-flex align-items-center">
+        <%= attendee.name %>
+        <small class="ml-1"><%= "@#{attendee.username}"%></small>
+    </span>
     <%= link_to "View Profile", user_path(attendee), class: "btn btn-info"%>
 </li>

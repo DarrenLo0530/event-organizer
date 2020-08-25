@@ -3,19 +3,20 @@
         <h5 class="card-title font-weight-bold"><%= event.name %></h5>
         <p class="card-subtitle"<%= event.creator %>></p>
         <p class="card-text"><%= event.description %></p>
-        <p>Event Time: <%= event.time.to_formatted_s(:long_ordinal) %></p>
-        
+        <hr class="border-light">
+        <p class="card-text">Organizer: <%= event.creator.name %> <small><%= "@#{event.creator.username}" %></small></p>
+        <p class="card-text">Event Time: <%= event.time.to_formatted_s(:long_ordinal) %></p>
     </div>
     <div class="card-footer text-muted">
-        <% if event.time < Time.now %>
-            <%= link_to "Event Over", root_path, class: "btn btn-primary disabled", "aria-disabled": true, tabindex: '-1' %>
+        <% if event.over? %>
+            <%= link_to "Event Over", root_path, class: "btn btn-danger disabled", "aria-disabled": true, tabindex: '-1' %>
         <% elsif user_signed_in? && current_user.attended_events.include?(event) %>
             <%= link_to "Attending", root_path, class: "btn btn-primary disabled", "aria-disabled": true, tabindex: '-1' %>
         <% else %>
             <%= link_to "Attend", event_registrations_path(event), method: :post, class: "btn btn-primary"%>
         <% end %>
         <% if is_show %>
-            <%= link_to "View Attendees", event_path(event), class: "btn btn-primary"%>
+            <%= link_to "View", event_path(event), class: "btn btn-primary"%>
         <% end %>
     </div>
 </div>

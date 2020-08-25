@@ -1,0 +1,12 @@
+<div class="container text-light">
+    <div class="row justify-content-center mb-4">
+        <h1 class="font-weight-bold">Incoming Invites</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <ul class="list-group">
+                <%= render partial: "invite", collection: @invites %>
+            </ul>
+        </div>
+    </div>
+</div>

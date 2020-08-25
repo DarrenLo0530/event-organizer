@@ -1,7 +1,19 @@
 <div class="container">
     <div class="row">
         <div class="col-5">
-            <%= render partial: "event", locals: {event: @event, is_show: false} %>
+            <%= render partial: "event", locals: {event: @event, is_show: false} %> 
+            <% if @event.creator == current_user && !@event.over? %>
+                <%= form_with url: event_invites_path(@event), method: :post do %>
+                    <div class="input-group mt-3">  
+
+                        <%= text_field_tag :invitee_username, "", placeholder: "Invite your friends", class: "form-control bg-dark text-light"%>
+                        <div class="input-group-append">
+                            <%= submit_tag "Invite", class: "btn btn-success"%>
+                        </div>
+                    </div>
+
+                <% end %>
+            <% end %>
         </div>
         <div class="col-7">
             <div class="card bg-dark text-light">
