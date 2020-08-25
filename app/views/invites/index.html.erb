@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-10">
             <ul class="list-group">
-                <%= render partial: "invite", collection: @invites %>
+
+                <% if @invites.exists? %>
+                    <%= render partial: "invite", collection: @invites %>
+                <% else %>
+                    <li class="list-group-item d-flex align-items-center bg-dark text-light lead">There are no incoming invites currently...</li>
+                <% end %>
             </ul>
         </div>
     </div>
